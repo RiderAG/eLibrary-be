@@ -1,0 +1,7 @@
+#Gradle
+.gradle
+
+#Intelij IDEA
+.idea
+*.iml
+*.iws
