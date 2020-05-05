@@ -1,1 +1,7 @@
+include 'config'
+
 rootProject.name = 'elibrary'
+
+rootProject.children.each {
+    it.buildFileName = "${it.projectDir.name}.gradle"
+}

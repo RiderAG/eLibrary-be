@@ -1,0 +1,22 @@
+version: '2.1'
+
+services:
+  config:
+    container_name: config
+    image: openjdk:8-jdk-slim
+    volumes:
+      - ./build/libs:/home/libs
+    command: >
+      bash -c "echo 'starting config'
+      && java -Xmx100m -jar /home/libs/config-0.1.0.jar"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    restart: always
+    expose:
+      - 3000
+    ports:
+      - "3000:3000"
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"

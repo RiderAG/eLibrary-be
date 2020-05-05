@@ -1,9 +1,49 @@
+buildscript {
+    ext {
+        springBootVersion = '2.2.1.RELEASE'
+        dependencyManagementVersion = '1.0.9.RELEASE'
+        springCloudVersion = 'Hoxton.SR3'
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version "${springBootVersion}" apply false
+    id 'io.spring.dependency-management' version "${dependencyManagementVersion}" apply false
+    id 'java'
+}
+
 allprojects {
     repositories {
         jcenter()
+        mavenLocal()
+        mavenCentral()
     }
 }
 
 subprojects {
-    version = '1.0'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java'
+
+    buildDir = file("${rootDir}/build/${name}")
+    version = '0.1.0'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    dependencies {
+        implementation platform("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
+        implementation 'org.springframework.boot:spring-boot-starter'
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+    }
+
+    bootJar {
+        destinationDirectory = file("${rootDir}/build/libs")
+    }
+}
+
+clean {
+    delete file('build')
 }
