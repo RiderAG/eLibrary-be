@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: registry
+  cloud:
+    config:
+      uri: http://localhost:3100
+      fail-fast: true
+---
+spring:
+  profiles:
+    active: docker
+  cloud:
+    config:
+      uri: http://config:3100
+      fail-fast: true

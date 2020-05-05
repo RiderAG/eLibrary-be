@@ -1,21 +1,43 @@
-version: '2.1'
+version: '2.2'
 
 services:
   config:
     container_name: config
-    image: openjdk:8-jdk-slim
+    image: openjdk:oraclelinux7
     volumes:
       - ./build/libs:/home/libs
     command: >
       bash -c "echo 'starting config'
       && java -Xmx100m -jar /home/libs/config-0.1.0.jar"
     environment:
+      - SPRING_PROFILES_ACTIVE=native
+    restart: always
+    expose:
+      - 3100
+    ports:
+      - "3100:3100"
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  registry:
+    container_name: registry
+    image: openjdk:oraclelinux7
+    volumes:
+      - ./build/libs:/home/libs
+      - ./wait_for_service.sh:/usr/bin/wait_for_service.sh
+    command: >
+      bash -c "echo 'starting registry'
+      && sh /usr/bin/wait_for_service.sh config:3100 5
+      && java -Xmx100m -jar /home/libs/registry-0.1.0.jar"
+    environment:
       - SPRING_PROFILES_ACTIVE=docker
     restart: always
     expose:
-      - 3000
+      - 3101
     ports:
-      - "3000:3000"
+      - "3101:3101"
     logging:
       options:
         max-size: "10m"

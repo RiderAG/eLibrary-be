@@ -1,8 +1,8 @@
 buildscript {
     ext {
-        springBootVersion = '2.2.1.RELEASE'
-        dependencyManagementVersion = '1.0.9.RELEASE'
-        springCloudVersion = 'Hoxton.SR3'
+        setProperty('springBootVersion', '2.2.6.RELEASE')
+        setProperty('dependencyManagementVersion', '1.0.9.RELEASE')
+        setProperty('springCloudVersion', 'Hoxton.SR3')
     }
 }
 
@@ -33,7 +33,6 @@ subprojects {
 
     dependencies {
         implementation platform("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
-        implementation 'org.springframework.boot:spring-boot-starter'
         testImplementation('org.springframework.boot:spring-boot-starter-test') {
             exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         }

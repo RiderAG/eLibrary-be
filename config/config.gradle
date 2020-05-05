@@ -3,5 +3,5 @@ dependencies {
 }
 
 springBoot {
-	mainClassName = 'com.rider.elibrary.config.Application'
+	mainClassName = 'com.rider.elibrary.config.ConfigApplication'
 }

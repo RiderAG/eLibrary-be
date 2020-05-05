@@ -1,0 +1,10 @@
+server:
+  port: 3101
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+    renewal-percent-threshold: 0.49
