@@ -64,3 +64,25 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
+
+  user:
+    container_name: user
+    image: openjdk:oraclelinux7
+    volumes:
+      - ./build/libs:/home/libs
+      - ./wait_for_service.sh:/usr/bin/wait_for_service.sh
+    command: >
+      bash -c "echo 'starting user'
+      && sh /usr/bin/wait_for_service.sh gateway:3102 5
+      && java -Xmx100m -jar /home/libs/user-0.1.0.jar"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    restart: always
+    expose:
+      - 3103
+    ports:
+      - "3103:3103"
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
