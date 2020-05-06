@@ -3,7 +3,7 @@ version: '2.2'
 services:
   config:
     container_name: config
-    image: openjdk:oraclelinux7
+    image: pluribuslabs/centos7-oracle-jdk-8
     volumes:
       - ./build/libs:/home/libs
     command: >
@@ -23,7 +23,7 @@ services:
 
   registry:
     container_name: registry
-    image: openjdk:oraclelinux7
+    image: pluribuslabs/centos7-oracle-jdk-8
     volumes:
       - ./build/libs:/home/libs
       - ./wait_for_service.sh:/usr/bin/wait_for_service.sh
@@ -45,7 +45,7 @@ services:
 
   gateway:
     container_name: gateway
-    image: openjdk:oraclelinux7
+    image: pluribuslabs/centos7-oracle-jdk-8
     volumes:
       - ./build/libs:/home/libs
       - ./wait_for_service.sh:/usr/bin/wait_for_service.sh
@@ -67,7 +67,7 @@ services:
 
   user:
     container_name: user
-    image: openjdk:oraclelinux7
+    image: pluribuslabs/centos7-oracle-jdk-8
     volumes:
       - ./build/libs:/home/libs
       - ./wait_for_service.sh:/usr/bin/wait_for_service.sh
@@ -82,6 +82,28 @@ services:
       - 3103
     ports:
       - "3103:3103"
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  authorization:
+    container_name: authorization
+    image: pluribuslabs/centos7-oracle-jdk-8
+    volumes:
+      - ./build/libs:/home/libs
+      - ./wait_for_service.sh:/usr/bin/wait_for_service.sh
+    command: >
+      bash -c "echo 'starting authorization'
+      && sh /usr/bin/wait_for_service.sh user:3103 5
+      && java -Xmx100m -jar /home/libs/authorization-0.1.0.jar"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    restart: always
+    expose:
+      - 3104
+    ports:
+      - "3104:3104"
     logging:
       options:
         max-size: "10m"

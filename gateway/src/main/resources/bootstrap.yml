@@ -11,6 +11,27 @@ eureka:
     fetchRegistry: true
     serviceUrl.defaultZone: http://localhost:3101/eureka/
 
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+      jwt:
+        key-value: |
+          -----BEGIN PUBLIC KEY-----
+          MIICITANBgkqhkiG9w0BAQEFAAOCAg4AMIICCQKCAgB0moU7+2ci63mF7dBQ+PIK
+          QTscZj7S46sKB7NKwkeLWuJcr3C7ZwSBeA89Y6fdpcZhd914Yk38UKDHK9u7UbfP
+          vOBhNKD2WweN5T5Y5oHZO50rv+1GzC7VRdpDfuRMwMkxABqNnlkgDJlijhnXEvOc
+          lFywHIIyW6IfJvYUV+uhoSqaSZTqkPn8nPMV0WXfnGpjX0E/VTOVy+2g5Ki7tkZ/
+          HS6F45S9KZQc5rbVa0oy5bRsTgBfO98Fe7zod1sDZarYGIrdq8tolOrNbetu49Ba
+          44ENowulBrnklpAHUp1kf/Q1M5dr9UBR/qTaV79AUvEHrks6Chpt5e8YodfNDsIg
+          NUU4N6yh2NcdahN9BkTyQGFasTuv7Df6s3uOxhk8cHEajQ/mmRWr0PkO4yUtzUJm
+          XMdOMkwbCnLmpJqYTYXyMS+7Bv5b3gcGvDyDRd6DC9QvjR/WxAN3s84FKeV9K0N8
+          9STaGF2MDedI6sNAi4fo1T6WrTPwp6NmRMrxGy07HT5X2X0GXo0xgseixRZ6VbZT
+          SCyxh0xqpuxiyevU0+Br9CFHbpTjMs6aa9dltlHmbVoRMIXUC3HMyIORYdqk6NJ7
+          gB0ToxlRM8vcDG1pu3n59aTJuAQHgq0RZpDuiOFvU7VgzPdmFr+rLi3yZ5UkmB9T
+          lM97Ex0MlED38Asau9B1WQIDAQAB
+          -----END PUBLIC KEY-----
+
 ---
 
 spring:
