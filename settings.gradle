@@ -1,5 +1,6 @@
 include 'config'
 include 'registry'
+include 'gateway'
 
 rootProject.name = 'elibrary'
 

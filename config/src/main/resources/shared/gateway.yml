@@ -1,0 +1,19 @@
+server:
+  port: 3102
+
+zuul:
+  routes:
+    users:
+      path: /api/users/**
+      url: http://localhost:3103/api/users
+
+---
+
+spring:
+  profiles: docker
+
+zuul:
+  routes:
+    users:
+      path: /api/users/**
+      url: http://user:3103/api/users

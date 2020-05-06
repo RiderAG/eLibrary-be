@@ -5,11 +5,11 @@ spring:
     config:
       uri: http://localhost:3100
       fail-fast: true
+
 ---
+
 spring:
-  profiles:
-    active: docker
+  profiles: docker
   cloud:
     config:
       uri: http://config:3100
-      fail-fast: true

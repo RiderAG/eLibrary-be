@@ -42,3 +42,25 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
+
+  gateway:
+    container_name: gateway
+    image: openjdk:oraclelinux7
+    volumes:
+      - ./build/libs:/home/libs
+      - ./wait_for_service.sh:/usr/bin/wait_for_service.sh
+    command: >
+      bash -c "echo 'starting gateway'
+      && sh /usr/bin/wait_for_service.sh registry:3101 5
+      && java -Xmx100m -jar /home/libs/gateway-0.1.0.jar"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    restart: always
+    expose:
+      - 3102
+    ports:
+      - "3102:3102"
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
