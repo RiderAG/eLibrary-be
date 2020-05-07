@@ -7,6 +7,9 @@ zuul:
     users:
       path: /api/users/**
       url: http://localhost:3103/api/users
+    login:
+      path: /api/login/**
+      url: http://localhost:3104/oauth/token
 
 ---
 
@@ -18,3 +21,6 @@ zuul:
     users:
       path: /api/users/**
       url: http://user:3103/api/users
+    login:
+      path: /api/login/**
+      url: http://authorization:3104/oauth/token
