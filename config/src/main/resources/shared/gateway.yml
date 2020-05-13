@@ -11,10 +11,22 @@ zuul:
       path: /api/login/**
       url: http://localhost:3104/oauth/token
 
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:3104/oauth/public
+
 ---
 
 spring:
   profiles: docker
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://authorization:3104/oauth/public
 
 zuul:
   routes:
