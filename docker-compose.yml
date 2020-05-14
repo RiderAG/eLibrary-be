@@ -1,4 +1,4 @@
-version: '2.2'
+version: '3.7'
 
 services:
   config:
@@ -108,3 +108,28 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
+
+  mysql-db:
+    container_name: mysql-db
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: 'elibrary'
+      MYSQL_USER: 'elibraryapp'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'l1ghTs_0Ff'
+    ports:
+      - 3306:3306
+    expose:
+      - '3306'
+    volumes:
+      - mysql_db_data_container:/var/lib/mysql
+    #      - ./mysql/elibrary_dump.sql:/docker-entrypoint-initdb.d/elibrary_dump.sql
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+volumes:
+  mysql_db_data_container:

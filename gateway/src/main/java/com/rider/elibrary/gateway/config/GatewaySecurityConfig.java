@@ -34,4 +34,5 @@ public class GatewaySecurityConfig extends WebSecurityConfigurerAdapter {
     JwtDecoder jwtDecoder() {
         return NimbusJwtDecoder.withJwkSetUri(this.jwkSetUri).build();
     }
+
 }
