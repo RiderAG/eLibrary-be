@@ -27,6 +27,7 @@ public class GatewaySecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .authorizeRequests()
                 .antMatchers("/api/login/**").permitAll()
+                .antMatchers("/api/users/registration/**").permitAll()
                 .anyRequest().authenticated();
     }
 

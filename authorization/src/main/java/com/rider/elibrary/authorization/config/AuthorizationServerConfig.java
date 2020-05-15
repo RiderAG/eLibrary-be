@@ -1,5 +1,6 @@
 package com.rider.elibrary.authorization.config;
 
+import com.rider.elibrary.authorization.config.component.CustomTokenEnhancer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -75,15 +76,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     @Bean
-    public JwtAccessTokenConverter tokenAccessConverter() {
-        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+    public JwtAccessTokenConverter tokenEnhancer() {
+        JwtAccessTokenConverter converter = new CustomTokenEnhancer();
         converter.setKeyPair(keyPair);
         return converter;
     }
 
     @Bean
     public JwtTokenStore tokenStore() {
-        return new JwtTokenStore(tokenAccessConverter());
+        return new JwtTokenStore(tokenEnhancer());
     }
 
     @Override
@@ -91,7 +92,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         endpoints
                 .authenticationManager(authenticationManager)
                 .tokenStore(tokenStore())
-                .accessTokenConverter(tokenAccessConverter());
+                .accessTokenConverter(tokenEnhancer());
     }
 
     @Override

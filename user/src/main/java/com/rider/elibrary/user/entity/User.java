@@ -1,5 +1,10 @@
 package com.rider.elibrary.user.entity;
 
+import com.rider.elibrary.user.model.UserRole;
+import com.rider.elibrary.user.model.request.RegistrationRequest;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -10,6 +15,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "USERS")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -18,49 +26,21 @@ public class User {
     private String id;
     @Column(unique = true, nullable = false)
     private String username;
+    @Column(unique = true, nullable = false)
+    private String email;
     @Column(nullable = false)
     private String password;
     private String authorities;
     @Column(nullable = false)
-    private String role;
+    private UserRole role;
 
-    public String getId() {
-        return id;
+    public static User from(RegistrationRequest request) {
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
+        user.setRole(UserRole.USER);
+        return user;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(String authorities) {
-        this.authorities = authorities;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 }

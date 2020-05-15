@@ -28,7 +28,8 @@ public class UserAuthModel {
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .authorities(new ArrayList<>())
-                .role(user.getRole())
+                .role(user.getRole().name())
                 .build();
     }
+
 }

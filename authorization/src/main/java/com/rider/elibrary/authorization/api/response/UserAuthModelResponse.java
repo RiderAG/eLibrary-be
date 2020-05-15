@@ -1,5 +1,6 @@
 package com.rider.elibrary.authorization.api.response;
 
+import com.rider.elibrary.authorization.model.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +19,6 @@ public class UserAuthModelResponse {
     private String username;
     private String password;
     private List<GrantedAuthority> authorities;
-    private String role;
+    private UserRole role;
 
 }

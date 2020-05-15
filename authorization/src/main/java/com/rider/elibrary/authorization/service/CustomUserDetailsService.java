@@ -20,6 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new CustomUserAuthModel(userAuthModel.getId(),
                 userAuthModel.getUsername(),
                 userAuthModel.getPassword(),
+                userAuthModel.getRole(),
                 userAuthModel.getAuthorities());
     }
 }

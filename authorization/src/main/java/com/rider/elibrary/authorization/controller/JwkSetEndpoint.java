@@ -1,4 +1,4 @@
-package com.rider.elibrary.authorization.endpoint;
+package com.rider.elibrary.authorization.controller;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
