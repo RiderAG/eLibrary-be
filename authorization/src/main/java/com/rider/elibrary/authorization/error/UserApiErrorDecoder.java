@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 import java.util.Optional;
 
 public class UserApiErrorDecoder implements ErrorDecoder {
@@ -33,7 +34,7 @@ public class UserApiErrorDecoder implements ErrorDecoder {
     }
 
     private boolean isUserApiException(String methodKey) {
-        return methodKey.toLowerCase().contains("user");
+        return methodKey.toLowerCase(Locale.getDefault()).contains("user");
     }
 
     private Optional<Exception> extractApiException(Response response) {
