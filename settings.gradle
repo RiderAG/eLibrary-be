@@ -3,6 +3,7 @@ include 'registry'
 include 'gateway'
 include 'user'
 include 'authorization'
+include 'catalog'
 
 rootProject.name = 'elibrary'
 

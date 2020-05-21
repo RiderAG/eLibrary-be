@@ -27,6 +27,15 @@ public class UserServiceImpl implements UserService {
     private Validator validator;
 
     @Override
+    public User getById(String userId) {
+        if (Objects.isNull(userId)) {
+            throw new UserApiException("User id is null", ErrorModel.USER_NOT_FOUND);
+        }
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new UserApiException("User not found", ErrorModel.USER_NOT_FOUND));
+    }
+
+    @Override
     public UserAuthModel getByUsername(String username) {
         User user = userRepository.findByUsername(username);
         if (Objects.isNull(user)) {

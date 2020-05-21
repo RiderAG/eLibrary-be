@@ -1,5 +1,6 @@
 package com.rider.elibrary.user.controller;
 
+import com.rider.elibrary.user.entity.User;
 import com.rider.elibrary.user.model.UserAuthModel;
 import com.rider.elibrary.user.model.request.RegistrationRequest;
 import com.rider.elibrary.user.service.UserService;
@@ -22,16 +23,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
+    @GetMapping("/profile")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity securedResource(@AuthenticationPrincipal Jwt jwt) {
-        StringBuilder sb = new StringBuilder();
-        jwt.getClaims().forEach((k, v) -> sb.append("\t")
-                .append(k).append(": ").append(v).append(System.lineSeparator())
-        );
-        return ResponseEntity.ok(
-                String.format("Secured Admin Resource\r\nClaims:\r\n%s", sb.toString())
-        );
+        User user = userService.getById(jwt.getClaim("user_id"));
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping("/auth")

@@ -10,6 +10,9 @@ zuul:
     login:
       path: /api/login/**
       url: http://localhost:3104/oauth/token
+    catalog:
+      path: /api/catalog/**
+      url: http://localhost:3105/api/catalog
 
 spring:
   security:
@@ -36,3 +39,6 @@ zuul:
     login:
       path: /api/login/**
       url: http://authorization:3104/oauth/token
+    catalog:
+      path: /api/catalog/**
+      url: http://catalog:3105/api/catalog

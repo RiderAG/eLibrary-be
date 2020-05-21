@@ -109,6 +109,28 @@ services:
         max-size: "10m"
         max-file: "10"
 
+  catalog:
+    container_name: catalog
+    image: pluribuslabs/centos7-oracle-jdk-8
+    volumes:
+      - ./build/libs:/home/libs
+      - ./wait_for_service.sh:/usr/bin/wait_for_service.sh
+    command: >
+      bash -c "echo 'starting catalog'
+      && sh /usr/bin/wait_for_service.sh gateway:3102 5
+      && java -Xmx100m -jar /home/libs/catalog-0.1.0.jar"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    restart: always
+    expose:
+      - 3105
+    ports:
+      - "3105:3105"
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
   mysql-db:
     container_name: mysql-db
     image: mysql:latest
