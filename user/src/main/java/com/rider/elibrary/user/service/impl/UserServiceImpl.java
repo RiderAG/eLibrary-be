@@ -2,6 +2,7 @@ package com.rider.elibrary.user.service.impl;
 
 import com.rider.elibrary.user.entity.User;
 import com.rider.elibrary.user.error.exception.ErrorModel;
+import com.rider.elibrary.user.error.exception.RegistrationException;
 import com.rider.elibrary.user.error.exception.UserApiException;
 import com.rider.elibrary.user.model.UserAuthModel;
 import com.rider.elibrary.user.model.request.RegistrationRequest;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Objects;
 
 @Service
@@ -47,7 +49,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String register(RegistrationRequest request) {
         if (userExists(request)) {
-            throw new UserApiException("User already exists", ErrorModel.USER_ALREADY_EXISTS);
+            throw new RegistrationException("User already exists", ErrorModel.USER_ALREADY_EXISTS, Collections.singletonList("User already exists"));
         }
         validator.validateRequest(request);
         User user = User.from(request);

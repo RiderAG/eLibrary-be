@@ -1,5 +1,6 @@
 package com.rider.elibrary.user.entity;
 
+import com.rider.elibrary.user.model.Gender;
 import com.rider.elibrary.user.model.UserRole;
 import com.rider.elibrary.user.model.request.RegistrationRequest;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "USERS")
@@ -29,6 +32,18 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
     @Column(nullable = false)
+    private String firstName;
+    @Column(nullable = false)
+    private String lastName;
+    @Column(nullable = false)
+    private LocalDate birthDate;
+    @Column(nullable = false)
+    private Gender gender;
+    @Column(nullable = false)
+    private String country;
+    private String city;
+    private String address;
+    @Column(nullable = false)
     private String password;
     private String authorities;
     @Column(nullable = false)
@@ -38,6 +53,13 @@ public class User {
         User user = new User();
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setBirthDate(LocalDate.parse(request.getBirthDate(), DateTimeFormatter.ISO_LOCAL_DATE));
+        user.setGender(Gender.valueOf(request.getGender().toUpperCase()));
+        user.setCountry(request.getCountry());
+        user.setCity(request.getCity());
+        user.setAddress(request.getAddress());
         user.setPassword(request.getPassword());
         user.setRole(UserRole.USER);
         return user;
