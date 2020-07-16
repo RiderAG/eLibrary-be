@@ -1,0 +1,33 @@
+server:
+  port: 3106
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:3104/oauth/public
+  jpa:
+    hibernate:
+      ddl-auto: update
+#    show-sql: true
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/elibrary
+    username: root
+    password: B1KE_freeride51
+    driverClassName: com.mysql.cj.jdbc.Driver
+    dialect: org.hibernate.dialect.MySQL8Dialect
+
+---
+
+spring:
+  profiles: docker
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://authorization:3104/oauth/public
+  datasource:
+    url: jdbc:mysql://mysql-db:3306/elibrary
+    username: elibraryapp
+    password: password

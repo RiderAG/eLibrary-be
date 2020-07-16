@@ -1,6 +1,5 @@
 package com.rider.elibrary.catalog.controller;
 
-import com.rider.elibrary.catalog.entity.Book;
 import com.rider.elibrary.catalog.model.Category;
 import com.rider.elibrary.catalog.model.request.CreateBookRequest;
 import com.rider.elibrary.catalog.service.CatalogService;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,17 +24,6 @@ public class CatalogController {
 
     @Autowired
     private CatalogService catalogService;
-
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity getCatalogPage() {
-        List<Book> books = new ArrayList<>();
-//        bookCards.add(new Book("Java 8", "Programming"));
-//        bookCards.add(new Book("Vinny The Pooh", "Tales"));
-//        bookCards.add(new Book("Art of War", "Philosophy"));
-//        bookCards.add(new Book("The Lost World", "Adventure"));
-        return ResponseEntity.ok(books);
-    }
 
     @PostMapping("/books")
     @ResponseStatus(HttpStatus.CREATED)
@@ -65,6 +52,11 @@ public class CatalogController {
                                       @RequestParam("pageIndex") Integer pageIndex,
                                       @RequestParam("onPage") Integer onPage) {
         return ResponseEntity.ok(catalogService.getByCategory(category, pageIndex, onPage));
+    }
+
+    @GetMapping("/books/with-ids")
+    public ResponseEntity getBooksByIds(@RequestParam("ids") List<String> ids) {
+        return ResponseEntity.ok(catalogService.getBooksByIds(ids));
     }
 
 }

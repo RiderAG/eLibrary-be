@@ -4,6 +4,7 @@ include 'gateway'
 include 'user'
 include 'authorization'
 include 'catalog'
+include 'cart'
 
 rootProject.name = 'elibrary'
 

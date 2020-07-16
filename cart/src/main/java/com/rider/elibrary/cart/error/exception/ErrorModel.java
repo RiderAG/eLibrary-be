@@ -1,12 +1,11 @@
-package com.rider.elibrary.catalog.error.exception;
+package com.rider.elibrary.cart.error.exception;
 
 import org.springframework.http.HttpStatus;
 
 public enum ErrorModel {
 
-    INCORRECT_CREATE_BOOK_REQUEST(HttpStatus.BAD_REQUEST, "incorrect.create.book.request"),
-    CATEGORY_NOT_FOUND(HttpStatus.BAD_REQUEST, "category.not.found"),
-    NULL_BOOK_ID(HttpStatus.BAD_REQUEST, "null.book.id");
+    NULL_USER_ID(HttpStatus.BAD_REQUEST, "null.user.id"),
+    CART_NOT_FOUND(HttpStatus.NOT_FOUND, "cart.not.found");
 
     private HttpStatus httpStatus;
     private String code;
@@ -23,5 +22,4 @@ public enum ErrorModel {
     public String getCode() {
         return code;
     }
-
 }

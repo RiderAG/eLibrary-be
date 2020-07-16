@@ -17,7 +17,7 @@ public class CatalogBookPageResponse {
     private Integer pageIndex;
     private Integer totalPages;
 
-    public static CatalogBookPageResponse of(Page<Book> page) {
+    public static CatalogBookPageResponse from(Page<Book> page) {
         return new CatalogBookPageResponse(
                 page.getContent(),
                 page.getPageable().getPageNumber() + 1,

@@ -13,6 +13,9 @@ zuul:
     catalog:
       path: /api/catalog/**
       url: http://localhost:3105/api/catalog
+    cart:
+      path: /api/cart/**
+      url: http://localhost:3106/api/cart
 
 spring:
   security:
@@ -42,3 +45,6 @@ zuul:
     catalog:
       path: /api/catalog/**
       url: http://catalog:3105/api/catalog
+    cart:
+      path: /api/cart/**
+      url: http://cart:3106/api/cart
